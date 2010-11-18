@@ -49,7 +49,6 @@ RESTful applications, Web Services, and XML-RPC.
     "lib/roxml/xml/parsers/libxml.rb",
     "lib/roxml/xml/parsers/nokogiri.rb",
     "lib/roxml/xml/references.rb",
-    "roxml.gemspec",
     "spec/definition_spec.rb",
     "spec/examples/active_record_spec.rb",
     "spec/examples/amazon_spec.rb",
@@ -120,6 +119,7 @@ RESTful applications, Web Services, and XML-RPC.
     "test/unit/xml_object_test.rb",
     "test/unit/xml_required_test.rb",
     "test/unit/xml_text_test.rb",
+    "vihai-roxml.gemspec",
     "website/index.html"
   ]
   s.homepage = %q{http://roxml.rubyforge.org}
