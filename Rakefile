@@ -7,7 +7,6 @@ ENV['RUBY_FLAGS'] = '-W1'
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
   gem.name = 'vihai-roxml'
-  gem.rubyforge_project = "roxml"
   gem.summary = "Ruby Object to XML mapping library"
   gem.description = <<EOF
 ROXML is a Ruby library designed to make it easier for Ruby developers to work with XML.
@@ -56,31 +55,29 @@ Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-require 'spec/rake/spectask'
-desc "Run specs"
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec' << 'examples'
-  spec.spec_opts = ['--options', "spec/spec.opts"]
-  spec.spec_files = FileList['spec/**/*_spec.rb']
-end
-
-namespace :spec do
-  [:libxml, :nokogiri].each do |parser|
-    desc "Spec ROXML under the #{parser} parser"
-    Spec::Rake::SpecTask.new(parser) do |spec|
-      spec.libs << 'lib' << 'spec' << 'examples'
-      spec.spec_opts = ['--options=spec/spec.opts']
-      spec.spec_files = ["spec/support/#{parser}.rb"] + FileList['spec/**/*_spec.rb']
-    end
-  end
-end
-
-desc "Run specs with rcov"
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.libs << 'lib' << 'spec'
+require 'rspec/core/rake_task'
+RSpec::Core::RakeTask.new do |spec|
   spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
+  spec.rspec_opts = ['-f progress', '-r ./spec/spec_helper.rb', '--color', '--backtrace']
 end
+
+#namespace :spec do
+#  [:libxml, :nokogiri].each do |parser|
+#    desc "Spec ROXML under the #{parser} parser"
+#    Spec::Rake::SpecTask.new(parser) do |spec|
+#      spec.libs << 'lib' << 'spec' << 'examples'
+#      spec.spec_opts = ['--options=spec/spec.opts']
+#      spec.spec_files = ["spec/support/#{parser}.rb"] + FileList['spec/**/*_spec.rb']
+#    end
+#  end
+#end
+#
+#desc "Run specs with rcov"
+#Spec::Rake::SpecTask.new(:rcov) do |spec|
+#  spec.libs << 'lib' << 'spec'
+#  spec.pattern = 'spec/**/*_spec.rb'
+#  spec.rcov = true
+#end
 
 require 'rake/testtask'
 desc "Test ROXML using the default parser selection behavior"
