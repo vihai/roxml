@@ -6,7 +6,7 @@ ENV['RUBY_FLAGS'] = '-W1'
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'roxml'
+  gem.name = 'vihai-roxml'
   gem.rubyforge_project = "roxml"
   gem.summary = "Ruby Object to XML mapping library"
   gem.description = <<EOF
