@@ -6,7 +6,8 @@ ENV['RUBY_FLAGS'] = '-W1'
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'vihai-roxml'
+  gem.name = 'roxml'
+  gem.rubyforge_project = "roxml"
   gem.summary = "Ruby Object to XML mapping library"
   gem.description = <<EOF
 ROXML is a Ruby library designed to make it easier for Ruby developers to work with XML.
@@ -24,7 +25,7 @@ EOF
   gem.add_dependency 'activesupport', '>= 2.3.0'
   gem.add_dependency 'nokogiri', '>= 1.3.3'
 
-  gem.add_development_dependency "rspec"
+  gem.add_development_dependency "rspec", '>= 2.0.0'
   gem.add_development_dependency "sqlite3-ruby", '>= 1.2.4'
   gem.add_development_dependency "activerecord", '>= 2.2.2'
 end
@@ -56,28 +57,28 @@ Rake::RDocTask.new do |rdoc|
 end
 
 require 'rspec/core/rake_task'
-RSpec::Core::RakeTask.new do |spec|
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rspec_opts = ['-f progress', '-r ./spec/spec_helper.rb', '--color', '--backtrace']
+desc "Run specs"
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.ruby_opts = '-Ilib -Ispec -Iexamples'
+  # spec.spec_files = FileList['spec/**/*_spec.rb']
 end
 
-#namespace :spec do
-#  [:libxml, :nokogiri].each do |parser|
-#    desc "Spec ROXML under the #{parser} parser"
-#    Spec::Rake::SpecTask.new(parser) do |spec|
-#      spec.libs << 'lib' << 'spec' << 'examples'
-#      spec.spec_opts = ['--options=spec/spec.opts']
-#      spec.spec_files = ["spec/support/#{parser}.rb"] + FileList['spec/**/*_spec.rb']
-#    end
-#  end
-#end
-#
-#desc "Run specs with rcov"
-#Spec::Rake::SpecTask.new(:rcov) do |spec|
-#  spec.libs << 'lib' << 'spec'
-#  spec.pattern = 'spec/**/*_spec.rb'
-#  spec.rcov = true
-#end
+namespace :spec do
+  [:libxml, :nokogiri].each do |parser|
+    desc "Spec ROXML under the #{parser} parser"
+    RSpec::Core::RakeTask.new(parser) do |spec|
+      spec.ruby_opts = '-Ilib -Ispec -Iexamples'
+      # spec.spec_files = ["spec/support/#{parser}.rb"] + FileList['spec/**/*_spec.rb']
+    end
+  end
+end
+
+desc "Run specs with rcov"
+RSpec::Core::RakeTask.new(:rcov) do |spec|
+  spec.rcov = true
+  spec.ruby_opts = '-Ilib -Ispec -Iexamples'
+  # spec.spec_files = FileList['spec/**/*_spec.rb']
+end
 
 require 'rake/testtask'
 desc "Test ROXML using the default parser selection behavior"

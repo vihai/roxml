@@ -1,11 +1,12 @@
-require 'spec/spec_helper'
+# encoding: utf-8
+require_relative './../spec_helper'
 
 describe ROXML, "encoding" do
   class TestResult
     include ROXML
     xml_accessor :message
   end
-
+  
   context "when provided non-latin characters" do
     it "should output those characters as input via methods" do
       res = TestResult.new
@@ -18,7 +19,7 @@ describe ROXML, "encoding" do
         doc.find_first('message').inner_xml
       end.should == "sadfk одловыа jjklsd "
     end
-
+  
     it "should output those characters as input via xml" do
       res = TestResult.from_xml("<test_result><message>sadfk одловыа jjklsd </message></test_result>")
       doc = ROXML::XML::Document.new
@@ -29,7 +30,7 @@ describe ROXML, "encoding" do
         doc.find_first('message').inner_xml
       end.should == "sadfk одловыа jjklsd "
     end
-
+  
     it "should allow override via the document" do
       res = TestResult.from_xml("<test_result><message>sadfk одловыа jjklsd </message></test_result>")
       if defined?(Nokogiri)
