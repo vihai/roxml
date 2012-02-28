@@ -6,8 +6,8 @@ ENV['RUBY_FLAGS'] = '-W1'
 # Run 'rake -T' to see list of generated tasks (from gem root directory)
 require 'jeweler'
 Jeweler::Tasks.new do |gem|
-  gem.name = 'roxml'
-  gem.rubyforge_project = "roxml"
+  gem.name = 'vihai-roxml'
+  gem.rubyforge_project = "vihai-roxml"
   gem.summary = "Ruby Object to XML mapping library"
   gem.description = <<EOF
 ROXML is a Ruby library designed to make it easier for Ruby developers to work with XML.
