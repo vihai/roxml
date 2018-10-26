@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |spec|
   spec.name          = 'vihai-roxml'
-  spec.version       = '3.5.2'
+  spec.version       = '3.5.3'
   spec.authors       = ["Ben Woosley", "Zak Mandhro", "Anders Engstrom", "Russ Olsen"]
   spec.email         = %q{ben.woosley@gmail.com}
   spec.homepage      = %q{http://roxml.rubyforge.org}
