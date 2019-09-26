@@ -153,7 +153,7 @@ module ROXML
           Float(v) unless v.blank?
         end
       end,
-      Fixnum   => lambda do |val|
+      Numeric   => lambda do |val|
         all(val) do |v|
           v.to_i unless v.blank?
         end
